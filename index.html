@@ -302,6 +302,23 @@
             transform: scale(1.05) translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
+		
+		/* 添加跟随鼠标移动的彩色圆的样式 */
+		.follow-mouse {
+			position: absolute;
+			width: 500px;
+			height: 500px;
+			background: linear-gradient(135deg, rgba(0, 182, 155, 0.3), rgba(0, 157, 255, 0.3), rgba(124, 93, 250, 0.3), rgba(0, 182, 155, 0.3));
+			border-radius: 50%;
+			filter: blur(40px);
+			opacity: 0.6;
+			pointer-events: none;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			transition: all 0.3s ease;
+			z-index: -1;
+		}
 
         /* 几何装饰元素 */
         .geometric-bg {
@@ -998,6 +1015,8 @@
             <p>我们专注于平面设计、服务器运维、3D建模等领域的创新解决方案，为您打造数字时代的视觉盛宴</p>
             <a href="#services" class="cta-button"><i class="fas fa-arrow-right"></i> 探索服务</a>
         </div>
+		<!-- 添加跟随鼠标移动的彩色圆 -->
+		<div class="follow-mouse"></div>
     </section>
 
     <!-- 关于我们 -->
@@ -1343,27 +1362,86 @@
             document.title = originalTitle;
         });
 
-	// 汉堡菜单
-	const hamburger = document.querySelector('.hamburger');
-	const navItems = document.querySelector('.nav-items');
+		// 汉堡菜单
+		const hamburger = document.querySelector('.hamburger');
+		const navItems = document.querySelector('.nav-items');
 
-	hamburger.addEventListener('click', () => {
-		navItems.classList.toggle('active');
-	});
-
-	// 点击导航链接后关闭菜单
-	document.querySelectorAll('.nav-items a').forEach(link => {
-		link.addEventListener('click', () => {
-			navItems.classList.remove('active');
+		hamburger.addEventListener('click', () => {
+			navItems.classList.toggle('active');
 		});
-	});
 
-	// 点击页面其他区域关闭菜单
-	document.addEventListener('click', (event) => {
-		if (!event.target.closest('.nav-container')) {
-			navItems.classList.remove('active');
-		}
-	});
-    </script>
+		// 点击导航链接后关闭菜单
+		document.querySelectorAll('.nav-items a').forEach(link => {
+			link.addEventListener('click', () => {
+				navItems.classList.remove('active');
+			});
+		});
+
+		// 点击页面其他区域关闭菜单
+		document.addEventListener('click', (event) => {
+			if (!event.target.closest('.nav-container')) {
+				navItems.classList.remove('active');
+			}
+		});
+
+		// 添加跟随鼠标移动的彩色圆的JavaScript
+		document.addEventListener('DOMContentLoaded', function () {
+			const followMouse = document.querySelector('.follow-mouse');
+			const heroSection = document.querySelector('#home');
+			const heroRect = heroSection.getBoundingClientRect();
+
+			// 计算跟踪范围（英雄区域的尺寸）
+			const trackArea = {
+				left: heroRect.left,
+				right: heroRect.right,
+				top: heroRect.top,
+				bottom: heroRect.bottom
+			};
+
+			// 存储当前位置和目标位置
+			let currentX = trackArea.left + (trackArea.right - trackArea.left) / 2;
+			let currentY = trackArea.top + (trackArea.bottom - trackArea.top) / 2;
+			let targetX = currentX;
+			let targetY = currentY;
+			let isInHero = true;
+
+			// 鼠标移动事件
+			document.addEventListener('mousemove', function (e) {
+				if (e.clientX >= trackArea.left && e.clientX <= trackArea.right && 
+					e.clientY >= trackArea.top && e.clientY <= trackArea.bottom) {
+					// 更新目标位置为鼠标位置
+					targetX = e.clientX;
+					targetY = e.clientY;
+					isInHero = true;
+				} else {
+					// 更新目标位置为初始位置
+					targetX = trackArea.left + (trackArea.right - trackArea.left) / 2;
+					targetY = trackArea.top + (trackArea.bottom - trackArea.top) / 2;
+					isInHero = false;
+				}
+			});
+
+			// 动画更新函数
+			function animateMouseFollow() {
+				if (!isInHero) return;
+
+				// 计算当前位置与目标位置的差值
+				const dx = targetX - currentX;
+				const dy = targetY - currentY;
+
+				// 使用缓动函数使移动更平滑
+				currentX += dx * 0.1;
+				currentY += dy * 0.1;
+
+				followMouse.style.left = `${currentX}px`;
+				followMouse.style.top = `${currentY}px`;
+
+				requestAnimationFrame(animateMouseFollow);
+			}
+
+			// 启动动画循环
+			requestAnimationFrame(animateMouseFollow);
+		});
+	</script>
 </body>
 </html>
