@@ -1343,27 +1343,27 @@
             document.title = originalTitle;
         });
 
-		// 汉堡菜单
-		const hamburger = document.querySelector('.hamburger');
-		const navItems = document.querySelector('.nav-items');
+	// 汉堡菜单
+	const hamburger = document.querySelector('.hamburger');
+	const navItems = document.querySelector('.nav-items');
 
-		hamburger.addEventListener('click', () => {
-			navItems.classList.toggle('active');
-		});
+	hamburger.addEventListener('click', () => {
+		navItems.classList.toggle('active');
+	});
 
-		// 点击导航链接后关闭菜单
-		document.querySelectorAll('.nav-items a').forEach(link => {
-			link.addEventListener('click', () => {
-				navItems.classList.remove('active');
-			});
+	// 点击导航链接后关闭菜单
+	document.querySelectorAll('.nav-items a').forEach(link => {
+		link.addEventListener('click', () => {
+			navItems.classList.remove('active');
 		});
+	});
 
-		// 点击页面其他区域关闭菜单
-		document.addEventListener('click', (event) => {
-			if (!event.target.closest('.nav-container')) {
-				navItems.classList.remove('active');
-			}
-		});
+	// 点击页面其他区域关闭菜单
+	document.addEventListener('click', (event) => {
+		if (!event.target.closest('.nav-container')) {
+			navItems.classList.remove('active');
+		}
+	});
     </script>
 </body>
 </html>
