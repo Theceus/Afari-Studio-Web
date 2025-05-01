@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afari Studio | 创意技术工坊</title>
 	<link rel="icon" href="https://pic1.imgdb.cn/item/67ef1e850ba3d5a1d7ec765e.png" type="image/png">
-    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<style>
         :root {
@@ -24,7 +24,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;/*默认是Inter*/
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -235,7 +235,16 @@
 		  color: var(--accent1);
 		  transform: translateY(-2px);
 		}
-		
+
+		.hamburger {
+		  display: none;
+		  cursor: pointer;
+		  background: none;
+		  border: none;
+		  color: var(--text);
+		  font-size: 1.5rem;
+		 }
+
         /* 英雄区样式 */
         .hero {
             height: 100vh;
@@ -618,19 +627,19 @@
         }
 
 		.notice-board {
-			background: rgba(255, 255, 255, 0.1); /* 磨砂背景 */
-			border-radius: 15px; /* 圆角 */
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 15px;
 			padding: 2rem;
-			backdrop-filter: blur(10px); /* 磨砂效果 */
-			border: 1px solid rgba(255, 255, 255, 0.1); /* 边框 */
-			transition: all 0.3s ease; /* 过渡效果 */
-			opacity: 0; /* 初始透明度 */
-			transform: translateY(20px); /* 初始位置 */
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			transition: all 0.3s ease;
+			opacity: 0;
+			transform: translateY(20px);
 		}
 
 		.notice-board.visible {
-			opacity: 1; /* 显示时的透明度 */
-			transform: translateY(0); /* 显示时的位置 */
+			opacity: 1;
+			transform: translateY(0);
 		}
 
 		.notice-board h3 {
@@ -822,30 +831,29 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
         }
-
+		
         /* 响应式设计 */
-        @media (max-width: 1024px) {
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
+        @media (max-width: 992px) {
             .nav-items {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(16, 24, 40, 0.95);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             }
             
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .nav-items.active {
+                display: flex;
             }
             
+            .hamburger {
+                display: block;
+            }
+
             .contact-container {
                 grid-template-columns: 1fr;
             }
@@ -858,12 +866,34 @@
                 grid-column: span 1;
             }
             
+            /* 关于我们版块的响应式优化 */
             .about-content {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: auto;
+                max-width: 100%;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services h2,
+            .products h2,
+            .team h2,
+            .contact h2,
+            .about h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
             .hero-content h1 {
                 font-size: 2rem;
             }
@@ -872,6 +902,15 @@
             .products-grid,
             .team-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
 
@@ -938,6 +977,9 @@
 					<span class="cursor">_</span>
 				</div>
 			</div>
+			<button class="hamburger">
+				<i class="fas fa-bars"></i>
+			</button>
 			<div class="nav-items">
 				<a href="#home"><i class="fas fa-home"></i> 首页</a>
 				<a href="#about"><i class="fas fa-info-circle"></i> 关于</a>
@@ -1064,7 +1106,7 @@
         <div class="team-grid">
             <div class="team-member scroll-animate">
                 <div class="member-image">
-					<img src="picture-url" alt="程序猿" class="member-image">
+					<img src="https://pic1.imgdb.cn/item/6813258b58cb8da5c8d6017a.jpg" alt="程序猿" class="member-image">
 				</div>
                 <h3><i class="fas fa-user-tie"></i>（空位招新）- 程序猿</h3>
                 <p>程序开发专家，擅长网页设计、程序制作和脚本编写</p>
@@ -1072,7 +1114,7 @@
 
             <div class="team-member scroll-animate">
                 <div class="member-image">
-					<img src="picture-url" alt="3D建模狮" class="member-image">
+					<img src="https://pic1.imgdb.cn/item/6813258b58cb8da5c8d6017a.jpg" alt="3D建模狮" class="member-image">
 				</div>
                 <h3><i class="fas fa-user-tie"></i>（空位招新）- 3D建模狮</h3>
                 <p>精通各类3D建模软件，拥有丰富的渲染经验</p>
@@ -1080,7 +1122,7 @@
 			
 			<div class="team-member scroll-animate">
 			    <div class="member-image">
-					<img src="picture-url" alt="平面设计狮" class="member-image">
+					<img src="https://pic1.imgdb.cn/item/6813258b58cb8da5c8d6017a.jpg" alt="平面设计狮" class="member-image">
 				</div>
 			    <h3><i class="fas fa-user-tie"></i>（空位招新）- 平面设计狮</h3>
 			    <p>精通各类图形和插画设计软件，拥有较高的艺术造诣和审美</p>
@@ -1088,7 +1130,7 @@
 
             <div class="team-member scroll-animate">
                 <div class="member-image">
-					<img src="picture-url" alt="技术总监" class="member-image">
+					<img src="https://pic1.imgdb.cn/item/6813258b58cb8da5c8d6017a.jpg" alt="技术总监" class="member-image">
 				</div>
                 <h3><i class="fas fa-user-tie"></i>（空位招新）- 技术总监</h3>
                 <p>提供技术指导，擅长服务器运维和疑难解答</p>
@@ -1300,6 +1342,28 @@
             clearInterval(titleInterval);
             document.title = originalTitle;
         });
+
+		// 汉堡菜单
+		const hamburger = document.querySelector('.hamburger');
+		const navItems = document.querySelector('.nav-items');
+
+		hamburger.addEventListener('click', () => {
+			navItems.classList.toggle('active');
+		});
+
+		// 点击导航链接后关闭菜单
+		document.querySelectorAll('.nav-items a').forEach(link => {
+			link.addEventListener('click', () => {
+				navItems.classList.remove('active');
+			});
+		});
+
+		// 点击页面其他区域关闭菜单
+		document.addEventListener('click', (event) => {
+			if (!event.target.closest('.nav-container')) {
+				navItems.classList.remove('active');
+			}
+		});
     </script>
 </body>
 </html>
