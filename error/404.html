@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 页面未找到</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .error-code {
+            font-size: 12rem;
+            font-weight: bold;
+            color: #00aaff;
+            text-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+            margin-bottom: 20px;
+            animation: float 6s ease-in-out infinite;
+            letter-spacing: 10px;
+        }
+
+        .error-message {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #ffffff;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 80px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-button {
+            background-color: transparent;
+            border: 2px solid #00aaff;
+            color: #00aaff;
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-button:hover {
+            background-color: rgba(0, 170, 255, 0.1);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.5);
+        }
+
+        .back-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: #00aaff;
+            opacity: 0;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: all 0.5s ease;
+        }
+
+        .back-button:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(100);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        .space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            z-index: 0;
+        }
+
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ff9500, #ff5e00);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 94, 0, 0.7);
+            z-index: 1;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .planet-1 {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #00aaff, #006699);
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.5);
+            transform-origin: center;
+        }
+
+        .planet-2 {
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #993333);
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            transform-origin: center;
+        }
+
+        .orbit {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-origin: center;
+        }
+
+        .footnote {
+            margin-top: 80px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .link {
+            color: #00aaff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .floating-logo {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 1.0rem;
+            color: #555;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .floating-logo:hover {
+            opacity: 1;
+            color: #00aaff;
+        }
+    </style>
+</head>
+<body>
+    <div class="space-background">
+        <!-- 星星背景 -->
+        <div class="stars" id="stars"></div>
+        
+        <!-- 太阳 -->
+        <div class="sun"></div>
+        
+        <!-- 行星轨道 -->
+        <div class="orbit" id="orbit1" style="width: 300px; height: 300px;"></div>
+        <div class="orbit" id="orbit2" style="width: 400px; height: 400px;"></div>
+        
+        <!-- 行星 -->
+        <div class="planet planet-1" id="planet1"></div>
+        <div class="planet planet-2" id="planet2"></div>
+    </div>
+
+    <div class="container">
+        <div class="error-code">404</div>
+        <h1 class="error-message">页面未找到</h1>
+        <p class="subtitle">您正在访问的页面似乎已经离开了我们的星系。别担心，宇宙无限广阔，总会找到回家的路。</p>
+        
+        <button class="back-button" onclick="history.back()">返回上一页</button>
+        
+        <div class="footnote">
+            如果您有任何疑问，可以联系 <a href="mailto:afaristudio@outlook.com" class="link">Afari Studio</a>
+        </div>
+    </div>
+
+    <div class="floating-logo">© 2025 Afari Studio 保留所有权</div>
+
+    <script>
+        // 创建星星背景
+        const starsContainer = document.getElementById('stars');
+        const starsCount = 100;
+        
+        for (let i = 0; i < starsCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // 随机大小
+            const size = Math.random() * 3;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            // 随机位置
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            
+            // 随机闪烁速度
+            const duration = 1 + Math.random() * 3;
+            star.style.setProperty('--duration', `${duration}s`);
+            
+            starsContainer.appendChild(star);
+        }
+        
+        // 行星围绕太阳公转
+        const planet1 = document.getElementById('planet1');
+        const planet2 = document.getElementById('planet2');
+        const orbit1 = document.getElementById('orbit1');
+        const orbit2 = document.getElementById('orbit2');
+        
+        // 行星1的轨道半径和角度
+        const radius1 = 150;
+        let angle1 = 0;
+        
+        // 行星2的轨道半径和角度
+        const radius2 = 200;
+        let angle2 = 0;
+        
+        // 太阳的位置（中心）
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        
+        function animatePlanets() {
+            // 更新行星1的位置
+            const x1 = centerX + radius1 * Math.cos(angle1);
+            const y1 = centerY + radius1 * Math.sin(angle1);
+            planet1.style.left = `${x1}px`;
+            planet1.style.top = `${y1}px`;
+            
+            // 更新行星2的位置
+            const x2 = centerX + radius2 * Math.cos(angle2);
+            const y2 = centerY + radius2 * Math.sin(angle2);
+            planet2.style.left = `${x2}px`;
+            planet2.style.top = `${y2}px`;
+            
+            // 更新角度（行星公转速度不同）
+            angle1 += 0.03;
+            angle2 += 0.015;
+            
+            // 旋转行星自身
+            planet1.style.transform = `rotate(${angle1 * 10}deg)`;
+            planet2.style.transform = `rotate(${angle2 * 15}deg)`;
+            
+            // 继续动画
+            requestAnimationFrame(animatePlanets);
+        }
+        
+        // 开始动画
+        animatePlanets();
+        
+        // 添加鼠标交互效果到错误码
+        const errorCode = document.querySelector('.error-code');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            
+            errorCode.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+        });
+        
+        // 随机旋转错误码
+        let rotation = 0;
+        const rotateErrorCode = () => {
+            rotation += 0.05;
+            errorCode.style.transform = `translate(0, 0) rotate(${rotation}deg)`;
+            requestAnimationFrame(rotateErrorCode);
+        };
+        rotateErrorCode();
+        
+        // 按钮悬浮效果
+        const button = document.querySelector('.back-button');
+        button.addEventListener('mouseenter', () => {
+            button.style.animation = 'none';
+        });
+    </script>
+</body>
+</html>
