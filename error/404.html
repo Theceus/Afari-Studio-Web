@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - 页面未找到</title>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Varela Round', sans-serif; /* 更圆润的字体 */
         }
 
         body {
@@ -73,7 +74,7 @@
         .error-code {
             font-size: 12rem;
             font-weight: bold;
-            color: #00aaff;
+            color: #0079b6;
             text-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
             margin-bottom: 20px;
             animation: float 6s ease-in-out infinite;
@@ -107,6 +108,7 @@
             animation: pulse 3s ease-in-out infinite;
             position: relative;
             overflow: hidden;
+            border-radius: 30px; /* 添加圆角 */
         }
 
         .back-button:hover {
@@ -227,8 +229,7 @@
             font-size: 1.0rem;
             color: #555;
             opacity: 0.7;
-            transition: all 0.3s ease;
-        }
+		}
 
         .floating-logo:hover {
             opacity: 1;
@@ -258,7 +259,8 @@
         <h1 class="error-message">页面未找到</h1>
         <p class="subtitle">您正在访问的页面似乎已经离开了我们的星系。别担心，宇宙无限广阔，总会找到回家的路。</p>
         
-        <button class="back-button" onclick="history.back()">返回上一页</button>
+        <!-- 修改了按钮的样式和功能 -->
+        <button class="back-button" onclick="closeWindow()">返回上一页</button>
         
         <div class="footnote">
             如果您有任何疑问，可以联系 <a href="mailto:afaristudio@outlook.com" class="link">Afari Studio</a>
@@ -355,6 +357,11 @@
             requestAnimationFrame(rotateErrorCode);
         };
         rotateErrorCode();
+        
+        // 关闭窗口功能
+        function closeWindow() {
+            window.close(); // 关闭当前窗口
+        }
         
         // 按钮悬浮效果
         const button = document.querySelector('.back-button');
