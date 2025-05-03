@@ -236,14 +236,65 @@
 		  transform: translateY(-2px);
 		}
 
+		/* 汉堡菜单样式 */
 		.hamburger {
-		  display: none;
-		  cursor: pointer;
-		  background: none;
-		  border: none;
-		  color: var(--text);
-		  font-size: 1.5rem;
-		 }
+			display: none;
+			cursor: pointer;
+			background: none;
+			border: none;
+			color: var(--text);
+			font-size: 1.8rem;
+			transition: all 0.3s ease;
+		}
+
+		/* 在移动设备上显示汉堡菜单 */
+		@media (max-width: 992px) {
+			.nav-items {
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				background: rgba(16, 24, 40, 0.95);
+				padding: 1rem 0;
+				max-height: 80vh; /* 设置最大高度，避免菜单占据整个屏幕 */
+				overflow-y: auto; /* 添加滚动条以防止内容显示不全 */
+			}
+			.nav-items a {
+				margin: 0rem 0; /* 减少导航项之间的间距 */
+			}
+			
+			.hamburger {
+				display: block;
+				z-index: 1000;
+			}
+
+			/* 汉堡菜单展开时的样式 */
+			.hamburger.active {
+				transform: rotate(0deg);
+			}
+
+			/* 汉堡菜单的三条线 */
+			.hamburger .bar {
+				width: 25px;
+				height: 3px;
+				background-color: var(--text);
+				margin: 5px 0;
+				transition: all 0.3s ease;
+				display: block;
+			}
+
+			/* 汉堡菜单展开时的线动画 */
+			.hamburger.active .bar:nth-child(1) {
+				transform: translateY(8px) rotate(45deg);
+			}
+
+			.hamburger.active .bar:nth-child(2) {
+				opacity: 0;
+			}
+
+			.hamburger.active .bar:nth-child(3) {
+				transform: translateY(-8px) rotate(-45deg);
+			}
+		}
 
         /* 英雄区样式 */
         .hero {
@@ -995,7 +1046,9 @@
 				</div>
 			</div>
 			<button class="hamburger">
-				<i class="fas fa-bars"></i>
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
 			</button>
 			<div class="nav-items">
 				<a href="#home"><i class="fas fa-home"></i> 首页</a>
@@ -1086,7 +1139,7 @@
         <div class="products-grid">
             <div class="product-card scroll-animate">
                 <div class="product-image">
-					<img src="https://pic1.imgdb.cn/item/67ef18810ba3d5a1d7ec74be.jpg" alt="Minecraft TimeRuins插件服" class="product-image">
+					<img src="https://i.imgur.com/sMYMeiS.jpg" alt="Minecraft TimeRuins插件服" class="product-image">
 				</div>
                 <div class="product-info">
                     <h3><i class="fas fa-gamepad"></i> MC TimeRuins插件服</h3>
@@ -1366,20 +1419,28 @@
 		const hamburger = document.querySelector('.hamburger');
 		const navItems = document.querySelector('.nav-items');
 
+		// 为汉堡菜单添加点击事件
 		hamburger.addEventListener('click', () => {
+			// 切换汉堡菜单的active类
+			hamburger.classList.toggle('active');
+			// 切换导航项的显示状态
 			navItems.classList.toggle('active');
 		});
 
 		// 点击导航链接后关闭菜单
 		document.querySelectorAll('.nav-items a').forEach(link => {
 			link.addEventListener('click', () => {
+				hamburger.classList.remove('active');
 				navItems.classList.remove('active');
 			});
 		});
 
 		// 点击页面其他区域关闭菜单
 		document.addEventListener('click', (event) => {
+			// 检查点击是否在导航容器之外
 			if (!event.target.closest('.nav-container')) {
+				// 如果在导航容器之外，移除汉堡菜单和导航项的active类
+				hamburger.classList.remove('active');
 				navItems.classList.remove('active');
 			}
 		});
