@@ -198,13 +198,6 @@
             transform-origin: center;
         }
 
-        .orbit {
-            position: absolute;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transform-origin: center;
-        }
-
         .footnote {
             margin-top: 80px;
             font-size: 1.2rem;
@@ -244,10 +237,6 @@
         
         <!-- 太阳 -->
         <div class="sun"></div>
-        
-        <!-- 行星轨道 -->
-        <div class="orbit" id="orbit1" style="width: 300px; height: 300px;"></div>
-        <div class="orbit" id="orbit2" style="width: 400px; height: 400px;"></div>
         
         <!-- 行星 -->
         <div class="planet planet-1" id="planet1"></div>
@@ -297,8 +286,6 @@
         // 行星围绕太阳公转
         const planet1 = document.getElementById('planet1');
         const planet2 = document.getElementById('planet2');
-        const orbit1 = document.getElementById('orbit1');
-        const orbit2 = document.getElementById('orbit2');
         
         // 行星1的轨道半径和角度
         const radius1 = 150;
