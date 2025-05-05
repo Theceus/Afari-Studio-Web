@@ -254,10 +254,22 @@
 				align-items: center;
 				justify-content: center;
 				background: rgba(16, 24, 40, 0.95);
-				padding: 1rem 0;
+				padding: 2rem 0;
 				max-height: 80vh; /* 设置最大高度，避免菜单占据整个屏幕 */
-				overflow-y: auto; /* 添加滚动条以防止内容显示不全 */
+				animation: slideDown 0.3s ease-out forwards;
 			}
+			
+			@keyframes slideDown {
+				from {
+					max-height: 0;
+					opacity: 0;
+				}
+				to {
+					max-height: 80vh;
+					opacity: 1;
+				}
+			}
+			
 			.nav-items a {
 				margin: 0rem 0; /* 减少导航项之间的间距 */
 			}
