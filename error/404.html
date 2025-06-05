@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - 页面未找到</title>
+	<link rel="icon" href="https://pic1.imgdb.cn/item/67ef1e850ba3d5a1d7ec765e.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <style>
         * {
@@ -60,6 +61,90 @@
             50% {
                 opacity: 1;
                 transform: scale(1);
+            }
+        }
+
+		/* 加载动画样式 */
+        #loading-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+
+        .loading {
+            position: relative;
+            display: flex;
+            gap: 15px;
+        }
+
+        .loading span {
+            position: relative;
+            width: 5px;
+            height: 20px;
+        }
+
+        .loading span::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            animation: animate 5s linear infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+
+        @keyframes animate {
+            0% {
+                background-color: #0f0;
+                box-shadow: 0 0 5px #0f0,
+                0 0 15px #0f0,
+                0 0 30px #0f0,
+                0 0 50px #0f0;
+                rotate: 0deg;
+            }
+            20% {
+                background-color: #0f0;
+                box-shadow: 0 0 5px #0f0,
+                0 0 15px #0f0,
+                0 0 30px #0f0,
+                0 0 50px #0f0;
+                rotate: 0deg;
+            }
+            40% {
+                background-color: #0f0;
+                box-shadow: 0 0 5px #0f0,
+                0 0 15px #0f0,
+                0 0 30px #0f0,
+                0 0 50px #0f0;
+                rotate: 90deg;
+                transform-origin: bottom;
+                filter: hue-rotate(0deg);
+            }
+            80% {
+                background-color: #0f0;
+                box-shadow: 0 0 5px #0f0,
+                0 0 15px #0f0,
+                0 0 30px #0f0,
+                0 0 50px #0f0;
+                rotate: 90deg;
+                transform-origin: bottom;
+                filter: hue-rotate(360deg);
+            }
+            90% {
+                background-color: #000;
+                box-shadow: none;
+                rotate: 0;
+            }
+            90.1%, 100% {
+                background-color: #000;
+                box-shadow: none;
             }
         }
 
@@ -231,6 +316,32 @@
     </style>
 </head>
 <body>
+	<!-- 加载动画 -->
+	<div id="loading-animation">
+		<div class="loading">
+			<span style="--i: 1;"></span>
+			<span style="--i: 2;"></span>
+			<span style="--i: 3;"></span>
+			<span style="--i: 4;"></span>
+			<span style="--i: 5;"></span>
+			<span style="--i: 6;"></span>
+			<span style="--i: 7;"></span>
+			<span style="--i: 8;"></span>
+			<span style="--i: 9;"></span>
+			<span style="--i: 10;"></span>
+			<span style="--i: 11;"></span>
+			<span style="--i: 12;"></span>
+			<span style="--i: 13;"></span>
+			<span style="--i: 14;"></span>
+			<span style="--i: 15;"></span>
+			<span style="--i: 16;"></span>
+			<span style="--i: 17;"></span>
+			<span style="--i: 18;"></span>
+			<span style="--i: 19;"></span>
+			<span style="--i: 20;"></span>
+		</div>
+	</div>
+
     <div class="space-background">
         <!-- 星星背景 -->
         <div class="stars" id="stars"></div>
@@ -249,7 +360,7 @@
         <p class="subtitle">您正在访问的页面似乎已经离开了我们的星系。别担心，宇宙无限广阔，总会找到回家的路。</p>
         
         <!-- 修改了按钮的样式和功能 -->
-        <button class="back-button" onclick="closeWindow()">关闭此页面</button>
+        <button class="back-button" id="backButton">返回工作室主页</button>
         
         <div class="footnote">
             如果您有任何疑问，可以联系 <a href="mailto:afaristudio@outlook.com" class="link">Afari Studio</a>
@@ -259,6 +370,21 @@
     <div class="floating-logo">© 2025 Afari Studio 保留所有权利</div>
 
     <script>
+		// 等待网页完全加载
+		window.addEventListener('load', function() {
+		    // 获取加载动画元素
+		    const loadingAnimation = document.getElementById('loading-animation');
+		    
+		    // 添加淡出动画的CSS类
+		    loadingAnimation.style.opacity = '0';
+		    loadingAnimation.style.transition = 'opacity 1s ease-out';
+		    
+		    // 淡出动画完成后移除元素
+		    setTimeout(() => {
+		        loadingAnimation.style.display = 'none';
+		    }, 1000);
+		});
+		
         // 创建星星背景
         const starsContainer = document.getElementById('stars');
         const starsCount = 100;
@@ -344,17 +470,17 @@
             requestAnimationFrame(rotateErrorCode);
         };
         rotateErrorCode();
-        
-        // 关闭窗口功能
-        function closeWindow() {
-            window.close(); // 关闭当前窗口
-        }
-        
+                
         // 按钮悬浮效果
         const button = document.querySelector('.back-button');
         button.addEventListener('mouseenter', () => {
             button.style.animation = 'none';
         });
+		
+		//返回工作室主页-按钮
+		document.getElementById('backButton').addEventListener('click', function() {
+		    window.location.href = 'https://afaristudio.netlify.app';
+		});
     </script>
 </body>
 </html>
