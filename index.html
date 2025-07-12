@@ -7,6 +7,7 @@
 	<link rel="icon" href="https://pic1.imgdb.cn/item/67ef1e850ba3d5a1d7ec765e.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 	<style>
         :root {
             --primary: #0F3460;
@@ -558,10 +559,20 @@
         }
 
         .product-image {
-            height: 400px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
             border-radius: 15px 15px 0 0;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+			object-fit: cover;
+			object-position: center;
+            display: block;
         }
 
         .product-card:hover .product-image {
@@ -659,8 +670,9 @@
         }
 
         .team-member:hover {
-            transform: translateY(-15px) rotate(1deg);
+            transform: scale(1.05);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+			border: 2px solid var(--accent1);
         }
 
         .member-image {
@@ -680,6 +692,27 @@
             opacity: 0.8;
         }
 
+		.team .swiper { 
+			padding: 4rem 0; 
+		}
+
+		.team .swiper-slide{
+			width:260px;
+			transition:transform 0.4s,filter 0.4s,opacity 0.4s;
+			opacity:0.5;
+			filter:blur(3px) scale(0.8);
+		}
+		
+		.team .swiper-slide-active{
+			opacity:1;
+			transform:scale(1.1);
+			z-index:2;
+		}
+		
+		.swiper-pagination-bullet{
+			background:var(--accent1);
+		}
+		
         /* 联系我们样式 */
         .contact {
             padding: 8rem 5% 4rem;
@@ -903,13 +936,28 @@
         }
         
         .about-text p {
-            margin-bottom: 1.5rem;
+          opacity: 0;
+          transform: translateX(-20px);
+          transition: all 0.6s ease-out;
+        }
+        
+        .about-text p.visible {
+          opacity: 1;
+          transform: translateX(0);
         }
         
         .about-image {
-            height: 600px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 300px;
             border-radius: 15px;
+            overflow: hidden; /* 防止图片超出圆角 */
+        }
+        
+        .about-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
         }
 		
         /* 响应式设计 */
@@ -1094,8 +1142,8 @@
                 <p><i class="fas fa-rocket"></i> 我们相信设计应该服务于用户体验的本质需求，技术应该推动创意的实现。这种理念贯穿于我们所有的项目中，使我们能够为客户提供独特而有效的解决方案。</p>
             </div>
             <div class="about-image">
-				<img src="https://pic1.imgdb.cn/item/68184a6758cb8da5c8dcaabb.webp" alt="Afari Studio" class="about-image">
-			</div>
+                <img src="https://pic1.imgdb.cn/item/68184a6758cb8da5c8dcaabb.webp" alt="Afari Studio" class="about-img">
+            </div>
         </div>
     </section>
 
@@ -1190,51 +1238,64 @@
     </section>
 
     <!-- 团队介绍 -->
-    <section id="team" class="team">
-        <h2>我们的团队</h2>
-        <div class="team-grid">
-			<div class="team-member scroll-animate">
-			    <div class="member-image">
-					<img src="https://pic1.imgdb.cn/item/68672dc058cb8da5c88e7da3.png" alt="静态网页设计狮" class="member-image">
-				</div>
-			    <h3><i class="fas fa-user-tie"></i>Theceus - 静态网页设计狮</h3>
-			    <p>工作室创始人，擅长静态网页的动画和交互设计</p>
-			</div>
-			
-            <div class="team-member scroll-animate">
-                <div class="member-image">
-					<img src="https://pic1.imgdb.cn/item/6863485758cb8da5c881033c.jpg" alt="程序猿" class="member-image">
-				</div>
-                <h3><i class="fas fa-user-tie"></i>往事随风 - 程序猿</h3>
-                <p>程序开发爱好者，擅长程序制作和脚本编写</p>
-            </div>
-
-            <div class="team-member scroll-animate">
-                <div class="member-image">
-					<img src="https://pic1.imgdb.cn/item/6813258b58cb8da5c8d6017a.jpg" alt="3D建模狮" class="member-image">
-				</div>
-                <h3><i class="fas fa-user-tie"></i>（空位招新）- 3D建模狮</h3>
-                <p>精通各类3D建模软件，拥有丰富的渲染经验</p>
-            </div>
-			
-			<div class="team-member scroll-animate">
-			    <div class="member-image">
-					<img src="https://pic1.imgdb.cn/item/6867337558cb8da5c88e914c.jpg" alt="平面设计狮" class="member-image">
-				</div>
-			    <h3><i class="fas fa-user-tie"></i>Julyy - 平面设计狮</h3>
-			    <p>精通各类图形和插画设计，拥有较高的艺术造诣和审美</p>
-			</div>
-
-            <div class="team-member scroll-animate">
-                <div class="member-image">
-					<img src="https://pic1.imgdb.cn/item/6863479058cb8da5c881016c.jpg" alt="技术总监" class="member-image">
-				</div>
-                <h3><i class="fas fa-user-tie"></i>神楽悠笙 - 技术总监</h3>
-                <p>提供技术指导，擅长服务器运维和疑难解答</p>
-            </div>
-        </div>
-    </section>
-
+	<section id="team" class="team">
+	  <h2>我们的团队</h2>
+	  <div class="team-grid swiper">
+	    <div class="swiper-wrapper">
+	      <div class="swiper-slide">
+	        <div class="team-member scroll-animate">
+	          <div class="member-image">
+	          	<img src="https://pic1.imgdb.cn/item/68672dc058cb8da5c88e7da3.png" alt="静态网页设计狮" class="member-image">
+	          </div>
+	          <h3><i class="fas fa-user-tie"></i>Theceus - 静态网页设计狮</h3>
+	          <p>工作室创始人，擅长静态网页的动画和交互设计</p>
+	        </div>
+	      </div>
+	      
+		  <div class="swiper-slide">
+		    <div class="team-member scroll-animate">
+		      <div class="member-image">
+		      	<img src="https://pic1.imgdb.cn/item/6863485758cb8da5c881033c.jpg" alt="程序猿" class="member-image">
+		      </div>
+		      <h3><i class="fas fa-user-tie"></i>往事随风 - 程序猿</h3>
+		      <p>程序开发爱好者，擅长程序制作和脚本编写</p>
+		    </div>
+		  </div>
+		  
+		  <div class="swiper-slide">
+		    <div class="team-member scroll-animate">
+		      <div class="member-image">
+		      	<img src="https://pic1.imgdb.cn/item/6813258b58cb8da5c8d6017a.jpg" alt="3D建模狮" class="member-image">
+		      </div>
+		      <h3><i class="fas fa-user-tie"></i>（空位招新）- 3D建模狮</h3>
+		      <p>精通各类3D建模软件，拥有丰富的渲染经验</p>
+		    </div>
+		  </div>
+		  
+		  <div class="swiper-slide">
+		    <div class="team-member scroll-animate">
+		      <div class="member-image">
+		      	<img src="https://pic1.imgdb.cn/item/6867337558cb8da5c88e914c.jpg" alt="平面设计狮" class="member-image">
+		      </div>
+		      <h3><i class="fas fa-user-tie"></i>Julyy - 平面设计狮</h3>
+		      <p>精通各类图形和插画设计，拥有较高的艺术造诣和审美</p>
+		    </div>
+		  </div>
+		  
+		  <div class="swiper-slide">
+		    <div class="team-member scroll-animate">
+		      <div class="member-image">
+		      	<img src="https://pic1.imgdb.cn/item/6863479058cb8da5c881016c.jpg" alt="技术总监" class="member-image">
+		      </div>
+		      <h3><i class="fas fa-user-tie"></i>神楽悠笙 - 技术总监</h3>
+		      <p>提供技术指导，擅长服务器运维和疑难解答</p>
+		    </div>
+		  </div>
+	    </div>
+	    <div class="swiper-pagination"></div>
+	  </div>
+	</section>
+	
     <!-- 联系我们 -->
     <section id="contact" class="contact">
         <h2>联系我们</h2>
@@ -1310,7 +1371,39 @@
         </div>
     </footer>
 
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+		// 简介文字自动浮现
+	    document.addEventListener('DOMContentLoaded', () => {
+	      const paragraphs = document.querySelectorAll('.about-text p');
+	  
+	      const observer = new IntersectionObserver(entries => {
+	        entries.forEach(entry => {
+	          if (entry.isIntersecting) {
+	            // 添加 visible 类，触发 CSS 动画
+	            entry.target.classList.add('visible');
+	          }
+	        });
+	      }, {
+	        threshold: 0.5 // 当段落 50% 可见时触发
+	      });
+	  
+	      paragraphs.forEach(p => observer.observe(p));
+	    });
+		
+		// 团队成员卡片自动轮播
+		window.addEventListener('DOMContentLoaded',()=>{
+		  new Swiper('.team .swiper',{
+		    loop:true,
+		    centeredSlides:true,
+		    slidesPerView:'auto',
+		    spaceBetween:50,
+			autoplay:{delay:1000,disableOnInteraction:false,pauseOnMouseEnter:true},
+		    pagination:{el:'.swiper-pagination',clickable:true},
+		    breakpoints:{0:{slidesPerView:1.2},768:{slidesPerView:1.8},992:{slidesPerView:2.6}}
+		  });
+		});
+		
 		// 等待网页完全加载
         window.addEventListener('load', function() {
             // 获取加载动画元素
